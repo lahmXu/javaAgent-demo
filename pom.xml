@@ -19,7 +19,7 @@
     </properties>
 
     <modules>
-        <module>agent</module>
+        <module>shenyu-client-agent-spring-websocket</module>
         <module>demo</module>
     </modules>
 

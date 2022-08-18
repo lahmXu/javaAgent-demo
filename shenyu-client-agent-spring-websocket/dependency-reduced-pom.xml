@@ -6,11 +6,7 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.lahmxu</groupId>
-  <artifactId>agent</artifactId>
-  <name>agent</name>
-  <version>0.0.1-SNAPSHOT</version>
-  <description>agent</description>
+  <artifactId>shenyu-client-agent-spring-websocket</artifactId>
   <build>
     <plugins>
       <plugin>
@@ -26,7 +22,7 @@
               <transformers>
                 <transformer>
                   <manifestEntries>
-                    <Premain-Class>com.lahmxu.agent.AgentDemo</Premain-Class>
+                    <Premain-Class>org.shenyu.client.agent.spring.websocket.AgentDemo</Premain-Class>
                   </manifestEntries>
                 </transformer>
               </transformers>
@@ -54,6 +50,40 @@
       </plugin>
     </plugins>
   </build>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <version>2.2.0.RELEASE</version>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>spring-boot-starter</artifactId>
+          <groupId>org.springframework.boot</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-boot-starter-json</artifactId>
+          <groupId>org.springframework.boot</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-boot-starter-tomcat</artifactId>
+          <groupId>org.springframework.boot</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-boot-starter-validation</artifactId>
+          <groupId>org.springframework.boot</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-web</artifactId>
+          <groupId>org.springframework</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-webmvc</artifactId>
+          <groupId>org.springframework</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+  </dependencies>
   <properties>
     <bytekit.version>0.0.8-SNAPSHOT</bytekit.version>
     <java.version>1.8</java.version>
