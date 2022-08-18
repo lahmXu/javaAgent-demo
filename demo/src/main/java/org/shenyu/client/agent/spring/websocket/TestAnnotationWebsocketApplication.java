@@ -37,7 +37,6 @@ public class TestAnnotationWebsocketApplication {
      */
     public static void main(final String[] args) {
         SpringApplication.run(TestAnnotationWebsocketApplication.class, args);
-        System.out.println("sss");
     }
 
     /**
