@@ -19,11 +19,6 @@ package org.shenyu.client.agent.spring.websocket;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.socket.WebSocketSession;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * TestAnnotationWebsocketApplication.
@@ -40,12 +35,5 @@ public class TestAnnotationWebsocketApplication {
         System.out.println("sss");
     }
 
-    /**
-     * Use map as simple cache.
-     * @return  session cache
-     */
-    @Bean
-    public Map<String, WebSocketSession> onlineUserCache() {
-        return new HashMap<>();
-    }
+    private void test(){}
 }

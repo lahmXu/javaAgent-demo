@@ -13,10 +13,11 @@ import java.util.zip.ZipFile;
 
 public class ClassesLoadUtil {
 
-    private static final Map<String, byte[]> path2Classes = new ConcurrentHashMap<>();
     private static final Map<String, byte[]> className2Classes = new ConcurrentHashMap<>();
 
     private static boolean havaLoaded = false;
+
+    private static String PACKAGE_PATH;
 
     private static void loadFromZipFile(String jarPath) {
         try {
@@ -32,48 +33,44 @@ public class ClassesLoadUtil {
 
     }
 
-    private static boolean entryRead(String jarPath, ZipEntry ze) throws IOException {
-        if (ze.getSize() > 0) {
-            String fileName = ze.getName();
-            if (!fileName.endsWith(".class")) {
-                return true;
-            }
-
-            try (ZipFile zf = new ZipFile(jarPath); InputStream input = zf.getInputStream(ze); ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
-                if (input == null) {
-                    return true;
-                }
-                int b = 0;
-                while ((b = input.read()) != -1) {
-                    byteArrayOutputStream.write(b);
-                }
-                byte[] bytes = byteArrayOutputStream.toByteArray();
-
-                path2Classes.put(fileName, bytes);
-
-                String name1 = fileName.replaceAll("\\.class", "").replace("BOOT-INF/classes/","");
-                String name2 = name1.replaceAll("/", ".");
-
-                if (fileName.contains("org/shenyu/client/agent/spring/websocket/")){
-                    className2Classes.put(name2, bytes);
-                    System.out.println("加载文件: fileName : " + fileName + ".  className:" + name2);
-                }
-            }
-        } else {
-//          System.out.println(ze.getName() + " size is 0");
+    private static void entryRead(String jarPath, ZipEntry ze) throws IOException {
+        if (ze.getSize() <= 0) {
+            return;
         }
-        return false;
+        String fileName = ze.getName();
+        if (!fileName.endsWith(".class")) {
+            return;
+        }
+
+        try (ZipFile zf = new ZipFile(jarPath); InputStream input = zf.getInputStream(ze); ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
+            if (input == null) {
+                return;
+            }
+            int b = 0;
+            while ((b = input.read()) != -1) {
+                byteArrayOutputStream.write(b);
+            }
+            byte[] bytes = byteArrayOutputStream.toByteArray();
+
+            String fileNameWithOutClass = fileName.replaceAll("\\.class", "");
+            String fileNameWithPath = fileNameWithOutClass.replaceAll("/", ".");
+
+            if (fileNameWithPath.startsWith(PACKAGE_PATH)){
+                className2Classes.put(fileNameWithPath, bytes);
+                System.out.println("load class, fileName: " + fileName + ", className:" + fileNameWithPath);
+            }
+        }
     }
 
 
-    public static Map<String, byte[]> getRewriteClasses(String agentArgs) {
+    public static Map<String, byte[]> getRewriteClasses(String agentArgs, String packagePath) {
+        PACKAGE_PATH = packagePath;
         synchronized (className2Classes) {
             if (!havaLoaded) {
                 loadFromZipFile(agentArgs);
                 havaLoaded = true;
             }
         }
-
         return className2Classes;
     }
 }
