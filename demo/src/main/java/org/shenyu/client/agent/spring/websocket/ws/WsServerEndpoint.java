@@ -31,7 +31,7 @@ import javax.websocket.server.ServerEndpoint;
 /**
  * WsServerEndpoint.
  */
-@ShenyuSpringWebSocketClient("/myWs")
+@ShenyuSpringWebSocketClient(path = "/myWs")
 @ServerEndpoint("/myWs")
 @Component
 public class WsServerEndpoint {

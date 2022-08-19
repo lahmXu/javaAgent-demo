@@ -1,30 +1,36 @@
 package org.shenyu.client.agent.spring.websocket;
 
-import org.apache.shenyu.client.spring.websocket.init.SpringWebSocketClientEventListener;
-
+import java.io.File;
+import java.io.IOException;
 import java.lang.instrument.ClassDefinition;
 import java.lang.instrument.Instrumentation;
 import java.lang.instrument.UnmodifiableClassException;
-import java.util.HashMap;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.Map;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.jar.JarFile;
 
 public class AgentDemo {
-
-    static ScheduledExecutorService scheduledExecutorService = new ScheduledThreadPoolExecutor(1);
 
     public static void premain(String agentArgs, Instrumentation inst) {
         System.out.println("-------------------agent start-------------------");
 
         String packagePrefix = "org.apache.shenyu.client.spring.websocket";
-        scheduledExecutorService.scheduleAtFixedRate(() -> redefine(inst, agentArgs, packagePrefix), 0, 10, TimeUnit.SECONDS);
+        redefine(inst, agentArgs, packagePrefix);
     }
 
 
     private static void redefine(Instrumentation instrumentation, String agentArgs, String packagePrefix) {
-        Map<String, Class> needRedefineClassMap = getNeedRedefineClass(instrumentation, packagePrefix);
+
+        URL url = null;
+        try {
+            url = new URL("file:" + agentArgs);
+            System.out.println(url);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+        ClassLoader loader = new URLClassLoader(new URL[]{url});
 
         Map<String, byte[]> rewriteClasses = ClassesLoadUtil.getRewriteClasses(agentArgs, packagePrefix);
 
@@ -40,15 +46,15 @@ public class AgentDemo {
                 System.out.println("Can not find class from rewriteClasses: " + className + ". Skip...");
                 continue;
             }
-
-            Class redefineClass = needRedefineClassMap.get(className);
-            if (redefineClass == null) {
-                System.out.println("Can not find class from needRedefineClassMap: " + className + ". Skip...");
-                continue;
-            }
-            System.out.println("Redefine class: " + className);
-            ClassDefinition classDefinition = new ClassDefinition(redefineClass, classBytes);
             try {
+                Class redefineClass = loader.loadClass(className);
+                if (redefineClass == null) {
+                    System.out.println("Can not find class from needRedefineClassMap: " + className + ". Skip...");
+                    continue;
+                }
+                System.out.println("Redefine class: " + className);
+                ClassDefinition classDefinition = new ClassDefinition(redefineClass, classBytes);
+
                 instrumentation.redefineClasses(classDefinition);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
@@ -59,32 +65,5 @@ public class AgentDemo {
             }
         }
 
-    }
-
-    private static Map<String, Class> getNeedRedefineClass(Instrumentation instrumentation, String packagePrefix) {
-        Map<String, Class> result = new HashMap<>();
-
-        Class[] allLoadedClasses = instrumentation.getAllLoadedClasses();
-        Map<String, Class> finupAllLoadedClasses = new HashMap<>();
-        try {
-            for (Class loadedClass : allLoadedClasses) {
-                if (loadedClass == null) {
-                    continue;
-                }
-                if (loadedClass.getCanonicalName() == null) {
-                    continue;
-                }
-                if (!loadedClass.getCanonicalName().startsWith(packagePrefix)) {
-                    continue;
-                }
-                System.out.println("===============================================================");
-                System.out.println(loadedClass.getCanonicalName());
-                result.put(loadedClass.getCanonicalName(), loadedClass);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return result;
     }
 }

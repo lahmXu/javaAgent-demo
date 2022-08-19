@@ -34,7 +34,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@ShenyuSpringWebSocketClient("/upload")
+@ShenyuSpringWebSocketClient(path = "/upload")
 @ServerEndpoint("/upload")
 @Controller
 public class UploadController {

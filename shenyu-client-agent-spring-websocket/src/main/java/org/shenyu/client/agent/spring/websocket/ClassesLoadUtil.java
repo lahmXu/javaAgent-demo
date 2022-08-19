@@ -33,32 +33,33 @@ public class ClassesLoadUtil {
 
     }
 
-    private static void entryRead(String jarPath, ZipEntry ze) throws IOException {
-        if (ze.getSize() <= 0) {
+    private static void entryRead(String jarPath, ZipEntry entry) throws IOException {
+        if (entry.getSize() <= 0) {
             return;
         }
-        String fileName = ze.getName();
+        String fileName = entry.getName();
         if (!fileName.endsWith(".class")) {
             return;
         }
+        String fileNameWithOutClass = fileName.replaceAll("\\.class", "");
+        String fileNameWithPath = fileNameWithOutClass.replaceAll("/", ".");
+        if (!fileNameWithPath.startsWith(PACKAGE_PATH)) {
+            return;
+        }
 
-        try (ZipFile zf = new ZipFile(jarPath); InputStream input = zf.getInputStream(ze); ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
+        try (ZipFile zf = new ZipFile(jarPath); InputStream input = zf.getInputStream(entry); ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
             if (input == null) {
                 return;
             }
+
             int b = 0;
             while ((b = input.read()) != -1) {
                 byteArrayOutputStream.write(b);
             }
             byte[] bytes = byteArrayOutputStream.toByteArray();
 
-            String fileNameWithOutClass = fileName.replaceAll("\\.class", "");
-            String fileNameWithPath = fileNameWithOutClass.replaceAll("/", ".");
-
-            if (fileNameWithPath.startsWith(PACKAGE_PATH)){
-                className2Classes.put(fileNameWithPath, bytes);
-                System.out.println("load class, fileName: " + fileName + ", className:" + fileNameWithPath);
-            }
+            className2Classes.put(fileNameWithPath, bytes);
+            System.out.println("load class, fileName: " + fileName + ", className:" + fileNameWithPath);
         }
     }
 
