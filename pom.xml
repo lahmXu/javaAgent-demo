@@ -19,8 +19,9 @@
     </properties>
 
     <modules>
-        <module>shenyu-client-agent-spring-websocket</module>
+        <module>agent</module>
         <module>demo</module>
+        <module>shenyu-client-websocket-annotation</module>
     </modules>
 
     <dependencyManagement>
