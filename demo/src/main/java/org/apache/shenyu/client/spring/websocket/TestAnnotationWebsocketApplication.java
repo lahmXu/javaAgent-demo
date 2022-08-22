@@ -18,8 +18,6 @@
 package org.apache.shenyu.client.spring.websocket;
 
 import org.apache.shenyu.client.core.register.ShenyuClientRegisterRepositoryFactory;
-import org.apache.shenyu.client.spring.websocket.init.SpringContextRegisterListener;
-import org.apache.shenyu.client.spring.websocket.init.SpringWebSocketClientEventListener;
 import org.apache.shenyu.client.spring.websocket.init.TestUtils;
 import org.apache.shenyu.common.enums.RpcTypeEnum;
 import org.apache.shenyu.register.client.api.ShenyuClientRegisterRepository;
@@ -76,30 +74,5 @@ public class TestAnnotationWebsocketApplication {
     @ConfigurationProperties(prefix = "shenyu")
     public ShenyuClientConfig shenyuClientConfig() {
         return new ShenyuClientConfig();
-    }
-
-    /**
-     * Spring web socket client event listener.
-     *
-     * @param clientConfig                   the client config
-     * @param shenyuClientRegisterRepository the shenyu client register repository
-     * @return the spring web socket client event listener
-     */
-    @Bean
-    public SpringWebSocketClientEventListener springWebSocketClientEventListener(
-            final ShenyuClientConfig clientConfig,
-            final ShenyuClientRegisterRepository shenyuClientRegisterRepository) {
-        return new SpringWebSocketClientEventListener(clientConfig.getClient().get(RpcTypeEnum.WEB_SOCKET.getName()), shenyuClientRegisterRepository);
-    }
-
-    /**
-     * Context register listener.
-     *
-     * @param clientConfig the client config
-     * @return the spring context register listener
-     */
-    @Bean
-    public SpringContextRegisterListener webSocketContextRegisterListener(final ShenyuClientConfig clientConfig) {
-        return new SpringContextRegisterListener(clientConfig.getClient().get(RpcTypeEnum.WEB_SOCKET.getName()));
     }
 }
