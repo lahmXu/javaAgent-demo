@@ -3,6 +3,8 @@ package com.lahmxu.agent;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.implementation.MethodDelegation;
 import net.bytebuddy.matcher.ElementMatchers;
+import org.apache.shenyu.client.spring.websocket.annotation.ShenyuSpringWebSocketClient;
+import org.apache.shenyu.client.spring.websocket.init.SpringWebSocketClientEventListener;
 
 import java.lang.instrument.Instrumentation;
 

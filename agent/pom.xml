@@ -24,16 +24,24 @@
             <artifactId>byte-buddy</artifactId>
             <version>1.12.12</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba.oneagent</groupId>-->
-<!--            <artifactId>one-java-agent-plugin</artifactId>-->
-<!--            <version>0.0.2</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba</groupId>-->
-<!--            <artifactId>bytekit-core</artifactId>-->
-<!--            <version>${bytekit.version}</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.lahmxu</groupId>
+            <artifactId>shenyu-client-websocket-annotation</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
