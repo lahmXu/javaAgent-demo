@@ -1,6 +1,11 @@
 package com.lahmxu.agent;
 
+import com.sun.tools.attach.VirtualMachine;
+import com.sun.tools.attach.VirtualMachineDescriptor;
+
 import java.lang.instrument.Instrumentation;
+import java.lang.instrument.UnmodifiableClassException;
+import java.util.List;
 
 public class AgentDemo {
 
@@ -17,10 +22,8 @@ public class AgentDemo {
         System.out.println("-------------------agent end-------------------");
     }
 
-    /**
-     * 如果不存在 {@link AgentDemo#premain(String, Instrumentation)}, 则会执行本方法
-     */
-    public static void premain(String agentArgs) {
-        System.out.println("------ premain 方法一个参数 ------ agentArgs:" + agentArgs);
+    public static void agentmain(String agentOps, Instrumentation inst) {
+        System.out.println("-------------------agent main start-------------------");
+        System.out.println("-------------------agent main end-------------------");
     }
 }

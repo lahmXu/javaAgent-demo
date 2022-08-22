@@ -5,12 +5,9 @@
   
 ### 执行步骤
 1. 切换到 javaAgent-demo 目录下执行`mvn clean package -DskipTests`, 等待编译完成
-2. 执行`java -javaagent:./agent/target/agent-0.0.1-SNAPSHOT.jar="hello lahmxu" -jar demo/target/demo-0.0.1-SNAPSHOT.jar`
+2. 先启动 DemoApplication，再执行` TestAttach.java` 通过 attach 功能，将 agent 中的内容挂载到指定服务上
 3. 控制台输出如下表示成功, agent中修改的方法成功执行
   ```log
-    -------------------agent start-------------------
-    ------ premain 方法两个入参 ------ agentArgs:hello lahmxu inst:sun.instrument.InstrumentationImpl@33909752
-    ------ 此处可以进行字节码操作 ------ 
-    -------------------agent end-------------------
-    ------ main ------
+  -------------------agent main start-------------------
+  -------------------agent main end-------------------
   ```
