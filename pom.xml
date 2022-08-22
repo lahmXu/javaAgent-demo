@@ -13,7 +13,7 @@
     <properties>
         <java.version>1.8</java.version>
         <plugin.maven.resource.version>3.1.0</plugin.maven.resource.version>
-        <spring.boot.version>2.2.0.RELEASE</spring.boot.version>
+        <spring.boot.version>2.6.0</spring.boot.version>
         <dubbo.version>2.6.5</dubbo.version>
         <plugin.maven.jar.version>2.4</plugin.maven.jar.version>
     </properties>

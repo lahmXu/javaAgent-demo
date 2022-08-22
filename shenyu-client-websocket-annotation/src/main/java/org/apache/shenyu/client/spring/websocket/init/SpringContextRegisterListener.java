@@ -92,45 +92,19 @@ public class SpringContextRegisterListener implements ApplicationListener<Contex
 
     @Override
     public void setBeanFactory(final BeanFactory beanFactory) throws BeansException {
-        this.beanFactory = beanFactory;
     }
 
     @Override
     public void onApplicationEvent(@NonNull final ContextRefreshedEvent contextRefreshedEvent) {
         LOG.info("======version: 2.5.0");
-        if (!registered.compareAndSet(false, true)) {
-            return;
-        }
-        if (Boolean.TRUE.equals(isFull)) {
-            publisher.publishEvent(buildMetaDataDTO());
-        }
-        try {
-            final int mergedPort = port <= 0 ? PortUtils.findPort(beanFactory) : port;
-            publisher.publishEvent(buildURIRegisterDTO(mergedPort));
-        } catch (ShenyuException e) {
-            throw new ShenyuException(e.getMessage() + "please config ${shenyu.client.websocket.props.port} in xml/yml !");
-        }
+
     }
 
     private URIRegisterDTO buildURIRegisterDTO(final int port) {
-        return URIRegisterDTO.builder()
-            .contextPath(this.contextPath)
-            .appName(appName)
-            .protocol(protocol)
-            .host(IpUtils.isCompleteHost(this.host) ? this.host : IpUtils.getHost(this.host))
-            .port(port)
-            .rpcType(RpcTypeEnum.WEB_SOCKET.getName())
-            .build();
+        return null;
     }
 
     private MetaDataRegisterDTO buildMetaDataDTO() {
-        return MetaDataRegisterDTO.builder()
-            .contextPath(contextPath)
-            .appName(appName)
-            .path(PathUtils.decoratorPathWithSlash(contextPath))
-            .rpcType(RpcTypeEnum.WEB_SOCKET.getName())
-            .enabled(true)
-            .ruleName(contextPath)
-            .build();
+        return null;
     }
 }

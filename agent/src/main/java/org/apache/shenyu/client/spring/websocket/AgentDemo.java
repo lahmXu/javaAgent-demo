@@ -13,29 +13,32 @@ public class AgentDemo {
     public static void premain(String agentArgs, Instrumentation inst) {
         System.out.println("-------------------agent start-------------------");
 
-        String packagePrefix = "org.apache.shenyu.client.spring.websocket.init.TestUtils";
+        String packagePrefix = "org.apache.shenyu.client.spring.websocket.init";
         redefine(inst, agentArgs, packagePrefix);
+
+        System.out.println("-------------------agent end-------------------");
     }
 
 
-    private static void redefine(Instrumentation instrumentation, String jarPath, String packagePrefix) {
+    private static void redefine(Instrumentation instrumentation, String agentJarPath, String packagePrefix) {
 
         URL url = null;
         try {
-            url = new URL("file:" + jarPath);
+            url = new URL("file:" + agentJarPath);
             System.out.println(url);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
         ClassLoader loader = new URLClassLoader(new URL[]{url});
 
-        Map<String, byte[]> rewriteClasses = ClassesLoadUtil.getRewriteClasses(jarPath, packagePrefix);
+        Map<String, byte[]> rewriteClasses = ClassesLoadUtil.getRewriteClasses(agentJarPath, packagePrefix);
 
         if (rewriteClasses.size() == 0) {
             System.out.println("Can not find class from rewriteClasses. Skip...");
             return;
         }
 
+        System.out.println("+++++++++++++++++++++++++++++++++");
         for (String className : rewriteClasses.keySet()) {
             byte[] classBytes = rewriteClasses.get(className);
 
@@ -44,7 +47,7 @@ public class AgentDemo {
                 continue;
             }
             try {
-                Class redefineClass = Class.forName(className);
+                Class redefineClass = loader.loadClass(className);
                 if (redefineClass == null) {
                     System.out.println("Can not find class from needRedefineClassMap: " + className + ". Skip...");
                     continue;

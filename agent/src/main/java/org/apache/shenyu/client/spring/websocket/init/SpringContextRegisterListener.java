@@ -97,7 +97,7 @@ public class SpringContextRegisterListener implements ApplicationListener<Contex
 
     @Override
     public void onApplicationEvent(@NonNull final ContextRefreshedEvent contextRefreshedEvent) {
-        LOG.info("======version: 2.xxxxxx");
+        System.out.println("======version: 2.xxxxxx");
         if (!registered.compareAndSet(false, true)) {
             return;
         }
