@@ -20,9 +20,9 @@ public class AgentDemo {
 
         // 拦截test方法执行，拦截之后执行 CallMethodDelegation 中的方法
         new AgentBuilder.Default()
-                .type(ElementMatchers.any())
+                .type(ElementMatchers.nameStartsWith("com.lahmxu.demo.DemoApplication"))
                 .transform((builder, typeDescription, classLoader, module) -> builder
-                        .method(ElementMatchers.named("test"))
+                        .method(ElementMatchers.named("onApplicationEvent"))
                         .intercept(MethodDelegation.to(CallMethodDelegation.class))
                 )
                 .installOn(inst);
