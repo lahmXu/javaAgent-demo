@@ -4,10 +4,6 @@
 - demo 模块是一个简单的 springboot 项目, 用于测试
   
 ### 执行步骤
-1. 执行 `sh start.sh`
-3. 控制台输出如下表示成功, agent中修改的方法成功执行
-  ```yaml
-  # 输出：
-  Agent TestUtils test()
-  ```
+1. 执行 `mvn clean install -DskipTests -Dcheckstyle.skip=true`
+2. 执行`java -javaagent:./agent/target/agent-0.0.1-SNAPSHOT.jar -jar demo/target/demo-0.0.1-SNAPSHOT.jar`
 
