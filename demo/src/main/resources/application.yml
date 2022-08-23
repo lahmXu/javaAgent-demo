@@ -19,6 +19,7 @@ server:
 
 shenyu:
   register:
+    enabled: true
     registerType: http
     serverLists: http://localhost:9095
     props:

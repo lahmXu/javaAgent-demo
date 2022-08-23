@@ -19,7 +19,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
-        <version>3.0.0</version>
+        <version>3.3.0</version>
         <executions>
           <execution>
             <phase>package</phase>
@@ -31,8 +31,6 @@
                 <transformer>
                   <manifestEntries>
                     <Premain-Class>org.apache.shenyu.client.spring.websocket.AgentDemo</Premain-Class>
-                    <Can-Redefine-Classes>true</Can-Redefine-Classes>
-                    <Can-Retransform-Classes>true</Can-Retransform-Classes>
                   </manifestEntries>
                 </transformer>
               </transformers>
@@ -46,4 +44,3 @@
     <java.version>1.8</java.version>
   </properties>
 </project>
-

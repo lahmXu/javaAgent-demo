@@ -17,16 +17,8 @@
 
 package org.apache.shenyu.client.spring.websocket;
 
-import org.apache.shenyu.client.core.register.ShenyuClientRegisterRepositoryFactory;
-import org.apache.shenyu.client.spring.websocket.init.TestUtils;
-import org.apache.shenyu.common.enums.RpcTypeEnum;
-import org.apache.shenyu.register.client.api.ShenyuClientRegisterRepository;
-import org.apache.shenyu.register.common.config.ShenyuClientConfig;
-import org.apache.shenyu.register.common.config.ShenyuRegisterCenterConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 
 /**
  * TestAnnotationWebsocketApplication.
@@ -40,39 +32,5 @@ public class TestAnnotationWebsocketApplication {
      */
     public static void main(final String[] args) {
         SpringApplication.run(TestAnnotationWebsocketApplication.class, args);
-        TestUtils.test();
-    }
-
-    /**
-     * Register the register repository for http client bean post processor.
-     *
-     * @param config the config
-     * @return the client register repository
-     */
-    @Bean
-    public ShenyuClientRegisterRepository shenyuClientRegisterRepository(final ShenyuRegisterCenterConfig config) {
-        return ShenyuClientRegisterRepositoryFactory.newInstance(config);
-    }
-
-    /**
-     * Shenyu Register Center Config.
-     *
-     * @return the Register Center Config
-     */
-    @Bean
-    @ConfigurationProperties(prefix = "shenyu.register")
-    public ShenyuRegisterCenterConfig shenyuRegisterCenterConfig() {
-        return new ShenyuRegisterCenterConfig();
-    }
-
-    /**
-     * Shenyu client config.
-     *
-     * @return the shenyu client config
-     */
-    @Bean
-    @ConfigurationProperties(prefix = "shenyu")
-    public ShenyuClientConfig shenyuClientConfig() {
-        return new ShenyuClientConfig();
     }
 }
