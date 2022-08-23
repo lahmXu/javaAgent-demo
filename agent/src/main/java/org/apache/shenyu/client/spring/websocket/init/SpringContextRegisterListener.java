@@ -45,6 +45,7 @@ import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.event.ApplicationContextEvent;
@@ -59,7 +60,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * The type Context register listener for websocket.
  */
-@ConditionalOnClass({AnnotationConfigApplicationContext.class})
 public class SpringContextRegisterListener implements ApplicationListener<ContextRefreshedEvent>, BeanFactoryAware {
 
     private static final Logger LOG = LoggerFactory.getLogger(SpringContextRegisterListener.class);

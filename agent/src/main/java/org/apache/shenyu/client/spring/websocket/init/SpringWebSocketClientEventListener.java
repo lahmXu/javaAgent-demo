@@ -40,6 +40,7 @@ import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.event.ApplicationContextEvent;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -61,7 +62,6 @@ import java.util.Properties;
 /**
  * The type Shenyu websocket client event listener.
  */
-@ConditionalOnClass({AnnotationConfigApplicationContext.class})
 public class SpringWebSocketClientEventListener implements ApplicationListener<ContextRefreshedEvent> {
 
     /**
