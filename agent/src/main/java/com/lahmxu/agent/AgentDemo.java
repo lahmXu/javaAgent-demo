@@ -22,11 +22,9 @@ public class AgentDemo {
 
         // 拦截test方法执行，拦截之后执行 CallMethodDelegation 中的方法
         new AgentBuilder.Default()
-                .type(ElementMatchers.any())
-                .transform((builder, typeDescription, classLoader, module) -> builder
-                        .method(ElementMatchers.named("test"))
-                        .intercept(MethodDelegation.to(CallMethodDelegation.class))
-                )
+                .with(DebugListener.getListener())
+                .type(ElementMatchers.nameStartsWithIgnoreCase("org.springframework.context."))
+                .transform(Transformer.transformer())
                 .installOn(inst);
 
         System.out.println("-------------------agent end-------------------");
