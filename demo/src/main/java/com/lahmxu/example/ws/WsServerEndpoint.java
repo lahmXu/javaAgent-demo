@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.apache.shenyu.client.spring.websocket.ws;
+package com.lahmxu.example.ws;
 
 import org.apache.shenyu.client.spring.websocket.annotation.ShenyuSpringWebSocketClient;
 import org.slf4j.Logger;

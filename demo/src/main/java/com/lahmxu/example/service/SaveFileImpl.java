@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.apache.shenyu.client.spring.websocket.service;
+package com.lahmxu.example.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

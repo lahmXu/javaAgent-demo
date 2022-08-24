@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.apache.shenyu.client.spring.websocket.service;
+package com.lahmxu.example.service;
 
 import java.util.Map;
 

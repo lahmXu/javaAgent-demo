@@ -15,22 +15,26 @@
  * limitations under the License.
  */
 
-package org.apache.shenyu.client.spring.websocket;
+package com.lahmxu.example.config;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
+import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 /**
- * TestAnnotationWebsocketApplication.
+ * The type Web socket configuration.
  */
-@SpringBootApplication
-public class TestAnnotationWebsocketApplication {
+@Configuration
+@EnableWebSocket
+public class WebSocketConfig {
 
     /**
-     * Main Entrance.
-     * @param args startup arguments
+     * define a ServerEndpointExporter bean.
+     * @return ServerEndpointExporter
      */
-    public static void main(final String[] args) {
-        SpringApplication.run(TestAnnotationWebsocketApplication.class, args);
+    @Bean
+    public ServerEndpointExporter serverEndpoint() {
+        return new ServerEndpointExporter();
     }
 }
