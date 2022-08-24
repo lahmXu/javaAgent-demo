@@ -23,7 +23,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * TestAnnotationWebsocketApplication.
  */
-@SpringBootApplication(scanBasePackages = "org.apache.shenyu.client")
+@SpringBootApplication(scanBasePackages = {"org.apache.shenyu.client", "com.lahmxu"})
 public class TestAnnotationWebsocketApplication {
 
     /**
