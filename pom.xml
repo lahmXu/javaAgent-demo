@@ -6,6 +6,12 @@
     <groupId>com.lahmxu</groupId>
     <artifactId>javaAgent-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+    </dependencies>
     <name>javaAgent-demo</name>
     <packaging>pom</packaging>
     <description>javaAgent-demo</description>
