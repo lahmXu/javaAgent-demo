@@ -13,10 +13,8 @@ public class AgentDemo {
     public static void premain(String agentArgs, Instrumentation inst) {
         System.out.println("-------------------agent start-------------------");
 
-        String packagePrefix = "org.apache.shenyu.client.spring.websocket.init.TestUtils";
+        String packagePrefix = "org.apache.shenyu.client.spring.websocket";
         redefine(inst, agentArgs, packagePrefix);
-
-        System.out.println("-------------------agent end-------------------");
     }
 
 
