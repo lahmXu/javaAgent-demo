@@ -14,8 +14,8 @@ public class TestAttach {
             System.out.println(vmd.displayName());
             if (vmd.displayName().endsWith("com.lahmxu.demo.DemoApplication")) {
                 VirtualMachine virtualMachine = VirtualMachine.attach(vmd.id());
-                virtualMachine.loadAgent("/Users/lahmxu/Documents/workspace/java/javaAgent-demo/agent/target/agent-0.0.1-SNAPSHOT.jar");
-                Thread.sleep(10000L);
+                virtualMachine.loadAgent("/Users/lahmxu/Documents/workspace/java/javaAgent-demo/agent/target/agent-0.0.1-SNAPSHOT.jar","com.lahmxu.demo.TestUtil&hello");
+                Thread.sleep(1000L);
                 virtualMachine.detach();
             }
         }
