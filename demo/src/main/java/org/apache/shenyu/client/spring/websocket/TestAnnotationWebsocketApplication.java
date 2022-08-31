@@ -40,7 +40,8 @@ public class TestAnnotationWebsocketApplication {
      */
     public static void main(final String[] args) {
         SpringApplication.run(TestAnnotationWebsocketApplication.class, args);
-        TestUtils.test();
+        TestUtils util = new TestUtils();
+        util.test();
     }
 
     /**
