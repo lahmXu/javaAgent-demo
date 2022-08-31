@@ -49,6 +49,8 @@
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <manifestEntries>
                                         <Premain-Class>org.apache.shenyu.client.spring.websocket.AgentDemo</Premain-Class>
+                                        <Can-Retransform-Classes>true</Can-Retransform-Classes>
+                                        <Can-Redefine-Classes>true</Can-Redefine-Classes>
                                     </manifestEntries>
                                 </transformer>
                             </transformers>
