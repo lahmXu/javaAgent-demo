@@ -12,14 +12,20 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <shenyu.client.version>2.5.0</shenyu.client.version>
     </properties>
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>com.lahmxu</groupId>-->
-<!--            <artifactId>shenyu-client-websocket-annotation</artifactId>-->
-<!--            <version>0.0.1-SNAPSHOT</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.apache.shenyu</groupId>
+            <artifactId>shenyu-client-core</artifactId>
+            <version>${shenyu.client.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shenyu</groupId>
+            <artifactId>shenyu-client-spring-websocket</artifactId>
+            <version>${shenyu.client.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

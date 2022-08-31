@@ -15,22 +15,10 @@
  * limitations under the License.
  */
 
-package org.apache.shenyu.client.spring.websocket;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+package org.apache.shenyu.client.spring.websocket.agent;
 
 /**
- * TestAnnotationWebsocketApplication.
+ * The type Context register listener for websocket.
  */
-@SpringBootApplication
-public class TestAnnotationWebsocketApplication {
-
-    /**
-     * Main Entrance.
-     * @param args startup arguments
-     */
-    public static void main(final String[] args) {
-        SpringApplication.run(TestAnnotationWebsocketApplication.class, args);
-    }
+public class SpringContextRegisterListener{
 }
