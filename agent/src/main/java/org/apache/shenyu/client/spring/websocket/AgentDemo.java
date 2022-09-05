@@ -27,7 +27,7 @@ public class AgentDemo {
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
-        ClassLoader loader = new URLClassLoader(new URL[]{url});
+        ClassLoader loader = new URLClassLoader(new URL[]{url}, instrumentation.getClass().getClassLoader());
 
         Map<String, byte[]> rewriteClasses = ClassesLoadUtil.getRewriteClasses(agentJarPath, packagePrefix);
 
