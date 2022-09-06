@@ -35,9 +35,11 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <groupId>com.sun</groupId>
+            <artifactId>tools</artifactId>
+            <version>1.8.0</version>
+            <scope>system</scope>
+            <systemPath>/Users/lahmxu/Library/Java/JavaVirtualMachines/azul-1.8.0_345/Contents/Home/lib/tools.jar</systemPath>
         </dependency>
     </dependencies>
 

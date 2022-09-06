@@ -1,0 +1,17 @@
+server:
+  port: 8001
+  address: 0.0.0.0
+
+shenyu:
+  register:
+    registerType: http
+    serverLists: http://localhost:9095
+    props:
+      username: admin
+      password: 123456
+  client:
+    websocket:
+      props:
+        contextPath: /ws-annotation
+        appName: ws-annotation
+        port: 8001

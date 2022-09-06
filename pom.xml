@@ -21,6 +21,7 @@
     <modules>
         <module>agent</module>
         <module>demo</module>
+        <module>shenyu-client-websocket-annotation</module>
     </modules>
 
     <dependencyManagement>
