@@ -26,22 +26,21 @@ public class AgentDemo {
     public static void agentmain(String agentArgs, Instrumentation inst) throws Throwable {
         System.out.println("-------------------agent main start-------------------");
 
-        // 获取 applicationContext
+        // Get applicationContext
         Field applicationContextField = ReflectionUtils.findField(SpringContextListener.class, "applicationContext");
         ReflectionUtils.makeAccessible(applicationContextField);
         ApplicationContext applicationContext = (ApplicationContext) ReflectionUtils.getField(applicationContextField, SpringContextListener.class);
 
-        // 获取配置参数
+        // Get yaml config
         Environment envs = applicationContext.getBean(Environment.class);
-
         Field beanFactoryField = ReflectionUtils.findField(SpringContextListener.class, "beanFactory");
         ReflectionUtils.makeAccessible(beanFactoryField);
         BeanFactory beanFactory = (BeanFactory) ReflectionUtils.getField(beanFactoryField, SpringContextListener.class);
-
         PropertiesConfig clientConfig = fetchShenyuClientConfig(envs);
         ShenyuRegisterCenterConfig shenyuRegisterCenterConfig = fetchShenyuRegisterCenterConfig(envs);
         ShenyuClientRegisterRepository shenyuClientRegisterRepository = ShenyuClientRegisterRepositoryFactory.newInstance(shenyuRegisterCenterConfig);
 
+        // Active Listener
         SpringWebSocketCLientEventListenerInit springWebSocketClientEventListener = new SpringWebSocketCLientEventListenerInit(clientConfig, shenyuClientRegisterRepository, applicationContext);
         springWebSocketClientEventListener.init();
         SpringContextRegisterListenerInit registerListener = new SpringContextRegisterListenerInit(clientConfig, beanFactory);

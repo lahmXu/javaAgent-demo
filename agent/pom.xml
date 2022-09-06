@@ -25,7 +25,7 @@
         <dependency>
             <groupId>org.apache.shenyu</groupId>
             <artifactId>shenyu-client-core</artifactId>
-            <version>2.5.0</version>
+            <version>2.5.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.lahmxu</groupId>
