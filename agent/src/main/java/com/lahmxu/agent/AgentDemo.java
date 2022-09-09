@@ -20,12 +20,25 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class AgentDemo {
 
-    public static void agentmain(String agentArgs, Instrumentation inst) throws Throwable {
+    private static final ScheduledExecutorService scheduleExecutor = new ScheduledThreadPoolExecutor(1);
+
+    public static void premain(String agentArgs, Instrumentation inst) throws Throwable {
         System.out.println("-------------------agent main start-------------------");
 
+        scheduleExecutor.schedule(() -> init(inst), 10, TimeUnit.SECONDS);
+
+
+
+        System.out.println("-------------------agent main end-------------------");
+    }
+
+    private static void init(Instrumentation instrumentation) {
         // Get applicationContext
         Field applicationContextField = ReflectionUtils.findField(SpringContextListener.class, "applicationContext");
         ReflectionUtils.makeAccessible(applicationContextField);
@@ -43,10 +56,12 @@ public class AgentDemo {
         // Active Listener
         SpringWebSocketCLientEventListenerInit springWebSocketClientEventListener = new SpringWebSocketCLientEventListenerInit(clientConfig, shenyuClientRegisterRepository, applicationContext);
         springWebSocketClientEventListener.init();
-        SpringContextRegisterListenerInit registerListener = new SpringContextRegisterListenerInit(clientConfig, beanFactory);
-        registerListener.init();
-
-        System.out.println("-------------------agent main end-------------------");
+        try {
+            SpringContextRegisterListenerInit registerListener = new SpringContextRegisterListenerInit(clientConfig, beanFactory);
+            registerListener.init();
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static ShenyuRegisterCenterConfig fetchShenyuRegisterCenterConfig(Environment environment){

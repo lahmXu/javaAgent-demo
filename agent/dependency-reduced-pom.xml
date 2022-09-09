@@ -29,7 +29,7 @@
               <transformers>
                 <transformer>
                   <manifestEntries>
-                    <Agent-Class>com.lahmxu.agent.AgentDemo</Agent-Class>
+                    <Premain-Class>com.lahmxu.agent.AgentDemo</Premain-Class>
                     <Can-Retransform-Classes>true</Can-Retransform-Classes>
                     <Can-Redefine-Classes>true</Can-Redefine-Classes>
                   </manifestEntries>

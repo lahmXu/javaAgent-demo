@@ -18,6 +18,11 @@
             <version>2.5.0-SNAPSHOT</version>
         </dependency>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>com.lahmxu</groupId>
             <artifactId>shenyu-client-websocket-annotation</artifactId>
             <version>0.0.1-SNAPSHOT</version>
@@ -49,7 +54,7 @@
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <manifestEntries>
-                                        <Agent-Class>com.lahmxu.agent.AgentDemo</Agent-Class>
+                                        <Premain-Class>com.lahmxu.agent.AgentDemo</Premain-Class>
                                         <Can-Retransform-Classes>true</Can-Retransform-Classes>
                                         <Can-Redefine-Classes>true</Can-Redefine-Classes>
                                     </manifestEntries>
