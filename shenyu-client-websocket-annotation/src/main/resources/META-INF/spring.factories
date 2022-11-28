@@ -15,5 +15,5 @@
 # limitations under the License.
 #
 
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.apache.shenyu.client.spring.init.SpringContextListener
+#org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+#org.apache.shenyu.client.spring.init.SpringContextListener

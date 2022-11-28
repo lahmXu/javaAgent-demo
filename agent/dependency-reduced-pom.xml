@@ -29,7 +29,7 @@
               <transformers>
                 <transformer>
                   <manifestEntries>
-                    <Premain-Class>com.lahmxu.agent.AgentDemo</Premain-Class>
+                    <Premain-Class>org.apache.shenyu.client.agent.AgentDemo</Premain-Class>
                     <Can-Retransform-Classes>true</Can-Retransform-Classes>
                     <Can-Redefine-Classes>true</Can-Redefine-Classes>
                   </manifestEntries>
