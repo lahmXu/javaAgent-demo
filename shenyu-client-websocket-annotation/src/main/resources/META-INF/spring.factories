@@ -16,4 +16,4 @@
 #
 
 #org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-#org.apache.shenyu.client.spring.init.SpringContextListener
+#org.apache.shenyu.client.spring.init.ShenyuSpringContextListener
