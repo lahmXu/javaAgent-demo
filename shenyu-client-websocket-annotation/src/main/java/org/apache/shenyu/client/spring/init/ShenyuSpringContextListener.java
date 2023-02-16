@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.lang.NonNull;
 
-@Configuration
 public class ShenyuSpringContextListener implements ApplicationListener<ContextRefreshedEvent>, BeanFactoryAware {
 
     private static final Logger LOG = LoggerFactory.getLogger(ShenyuSpringContextListener.class);
@@ -32,7 +31,6 @@ public class ShenyuSpringContextListener implements ApplicationListener<ContextR
     }
 
     public void init() {
-//        System.out.println("origin init....");
         LOG.info("origin init...");
     }
 }

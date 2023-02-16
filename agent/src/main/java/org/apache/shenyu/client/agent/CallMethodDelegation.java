@@ -11,7 +11,6 @@ public class CallMethodDelegation {
     public static Object call(@RuntimeType @SuperCall Callable<Object> callable) {
         Object result = null;
         try {
-            // 反射调用 jar 加载的方法
             result = callable.call();
         } catch (Exception e) {
             e.printStackTrace();
